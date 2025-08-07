@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 const taskRoutes = require("./routes/taskRoutes");
 const authRoutes = require("./routes/authRoutes");
 const errorHandler = require("./middlewares/errorHandler");
-const notFounnRoute = require("./middlewares/notFoundRoute");
+const notFounRoute = require("./middlewares/notFoundRoute");
 
 dotenv.config();
 connectDB();
@@ -26,9 +26,8 @@ app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", authRoutes);
-app.use(notFounnRoute);
+app.use(notFounRoute);
 app.use(errorHandler);
-app.options("*", cors());
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
