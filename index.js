@@ -26,6 +26,9 @@ app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", authRoutes);
+// app.options("*", (req, res) => {
+//   res.sendStatus(204);
+// });
 app.use(notFounRoute);
 app.use(errorHandler);
 

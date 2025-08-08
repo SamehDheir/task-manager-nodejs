@@ -16,12 +16,14 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   const token = generateToken(user);
 
+  const isProduction = process.env.NODE_ENV === "production";
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 24 * 60 * 60 * 1000,
   });
+
   res.status(201).json({
     success: true,
     message: "Registration successful",
@@ -46,11 +48,11 @@ exports.signin = catchAsync(async (req, res, next) => {
   }
 
   const token = generateToken(user);
-
+  const isProduction = process.env.NODE_ENV === "production";
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 24 * 60 * 60 * 1000,
   });
 
